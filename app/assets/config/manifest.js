@@ -1,7 +1,5 @@
 //= link_tree ../images
-//= link_directory ../javascripts .js
-//= link_directory ../stylesheets .css
-//= link_tree ../../javascript .js
-//= link_tree ../../../vendor/javascript .js
-//= link popper.js
-//= link bootstrap.min.js
+//= link application.css
+//= link application.js
+//= link controllers/application.js
+//= link_tree ../../../app/javascript/controllers .js
