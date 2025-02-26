@@ -55,9 +55,14 @@ User.create!(
 
 # Create benefits
 
-# Create benefits
-senior_paris = Benefit.create!(name: "Senior Paris Benefit", amount: 2000)
-senior_other = Benefit.create!(name: "Senior Other Location Benefit", amount: 1500)
-mid_paris = Benefit.create!(name: "Mid-level Paris Benefit", amount: 1000)
-mid_other = Benefit.create!(name: "Mid-level Other Location Benefit", amount: 500)
-intern = Benefit.create!(name: "Intern Benefit", amount: 100)
+prime_annuelle = Benefit.create!(name: "Prime annuelle", recurrence: :yearly)
+prime_anciennete = Benefit.create!(name: "Prime d'ancienneté", recurrence: :one_time)
+prime_formation = Benefit.create!(name: "Prime de formation", recurrence: :one_time)
+
+# Create rules
+
+senior_paris_yearly = Rule.create!(name: "Seniority more than 6 years, Paris", amount: 2000, benefit: prime_annuelle)
+senior_lyon_yearly = Rule.create!(name: "Seniority more than 6 years, Lyon", amount: 1500, benefit: prime_annuelle)
+mid_paris_yearly = Rule.create!(name: "Seniority between 3 and 5 years, Paris", amount: 1000, benefit: prime_annuelle)
+mid_lyon_yearly = Rule.create!(name: "Seniority between 3 and 5 years, Lyon", amount: 500, benefit: prime_annuelle)
+intern_yearly = Rule.create!(name: "Stagiaire", amount: 100, benefit: prime_annuelle)
