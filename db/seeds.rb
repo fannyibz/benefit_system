@@ -52,3 +52,12 @@ User.create!(
   contract_type: "Stage"
 )
 
+
+# Create benefits
+
+# Create benefits
+senior_paris = Benefit.create!(name: "Senior Paris Benefit", amount: 2000)
+senior_other = Benefit.create!(name: "Senior Other Location Benefit", amount: 1500)
+mid_paris = Benefit.create!(name: "Mid-level Paris Benefit", amount: 1000)
+mid_other = Benefit.create!(name: "Mid-level Other Location Benefit", amount: 500)
+intern = Benefit.create!(name: "Intern Benefit", amount: 100)
