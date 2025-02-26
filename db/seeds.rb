@@ -7,3 +7,48 @@
 #   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
+
+# Clear existing data
+User.destroy_all
+Benefit.destroy_all
+# Create test users
+User.create!(
+  email: "senior.paris@example.com",
+  password: "password",
+  start_date: 7.years.ago,
+  location: "Paris",
+  contract_type: "CDI"
+)
+
+User.create!(
+  email: "senior.lyon@example.com",
+  password: "password",
+  start_date: 7.years.ago,
+  location: "Lyon",
+  contract_type: "CDI"
+)
+
+User.create!(
+  email: "mid.paris@example.com",
+  password: "password",
+  start_date: 4.years.ago,
+  location: "Paris",
+  contract_type: "CDI"
+)
+
+User.create!(
+  email: "mid.lyon@example.com",
+  password: "password",
+  start_date: 4.years.ago,
+  location: "Lyon",
+  contract_type: "CDI"
+)
+
+User.create!(
+  email: "intern@example.com",
+  password: "password",
+  start_date: 1.month.ago,
+  location: "Paris",
+  contract_type: "Stage"
+)
+
