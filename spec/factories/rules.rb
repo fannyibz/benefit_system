@@ -1,8 +1,9 @@
 FactoryBot.define do
   factory :rule do
     name { "Rule" }
-    amount { 1000 }
+    amount { 100 }
     benefit
+    conditions { {} }
 
     trait :with_seniority_and_paris do
       conditions { { seniority: 5, location: 'Paris' } }

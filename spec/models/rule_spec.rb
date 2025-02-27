@@ -13,19 +13,104 @@ RSpec.describe Rule, type: :model do
   end
 
   describe 'stored attributes' do
-    it 'allows access to seniority' do
-      rule = build(:rule, conditions: { seniority: 5 })
-      expect(rule.seniority).to eq(5)
+    it { should respond_to(:min_seniority) }
+    it { should respond_to(:max_seniority) }
+    it { should respond_to(:location) }
+    it { should respond_to(:contract_type) }
+  end
+
+  describe '#matches_user_conditions?' do
+    let(:rule) { create(:rule) }
+    let(:user) { create(:user) }
+
+    context 'when conditions are empty' do
+      it 'returns false' do
+        expect(rule.matches_user_conditions?(user)).to be false
+      end
     end
 
-    it 'allows access to location' do
-      rule = build(:rule, conditions: { location: 'Paris' })
-      expect(rule.location).to eq('Paris')
+    context 'with seniority conditions' do
+      let(:user) { create(:user, start_date: 3.years.ago) }
+
+      it 'matches when user seniority is within range' do
+        rule.update(conditions: { min_seniority: 2, max_seniority: 5 })
+        expect(rule.matches_user_conditions?(user)).to be true
+      end
+
+      it 'does not match when user seniority is too low' do
+        rule.update(conditions: { min_seniority: 5 })
+        expect(rule.matches_user_conditions?(user)).to be false
+      end
+
+      it 'does not match when user seniority is too high' do
+        rule.update(conditions: { max_seniority: 2 })
+        expect(rule.matches_user_conditions?(user)).to be false
+      end
+
+      it 'matches with only min_seniority' do
+        rule.update(conditions: { min_seniority: 2 })
+        expect(rule.matches_user_conditions?(user)).to be true
+      end
+
+      it 'matches with only max_seniority' do
+        rule.update(conditions: { max_seniority: 5 })
+        expect(rule.matches_user_conditions?(user)).to be true
+      end
     end
 
-    it 'allows access to contract_type' do
-      rule = build(:rule, conditions: { contract_type: 'full_time' })
-      expect(rule.contract_type).to eq('full_time')
+    context 'with location condition' do
+      let(:user) { create(:user, location: 'Paris') }
+
+      it 'matches when locations match' do
+        rule.update(conditions: { location: 'Paris' })
+        expect(rule.matches_user_conditions?(user)).to be true
+      end
+
+      it 'does not match when locations differ' do
+        rule.update(conditions: { location: 'London' })
+        expect(rule.matches_user_conditions?(user)).to be false
+      end
+    end
+
+    context 'with contract_type condition' do
+      let(:user) { create(:user, contract_type: 'full_time') }
+
+      it 'matches when contract types match' do
+        rule.update(conditions: { contract_type: 'full_time' })
+        expect(rule.matches_user_conditions?(user)).to be true
+      end
+
+      it 'does not match when contract types differ' do
+        rule.update(conditions: { contract_type: 'part_time' })
+        expect(rule.matches_user_conditions?(user)).to be false
+      end
+    end
+
+    context 'with multiple conditions' do
+      let(:user) { create(:user, 
+                         start_date: 3.years.ago,
+                         location: 'Paris',
+                         contract_type: 'full_time') }
+
+      it 'matches when all conditions are met' do
+        rule.update(conditions: {
+          min_seniority: 2,
+          max_seniority: 5,
+          location: 'Paris',
+          contract_type: 'full_time'
+        })
+        expect(rule.matches_user_conditions?(user)).to be true
+      end
+
+      it 'does not match when any condition fails' do
+        rule.update(conditions: {
+          min_seniority: 2,
+          max_seniority: 5,
+          location: 'London',
+          contract_type: 'full_time'
+        })
+        expect(rule.matches_user_conditions?(user)).to be false
+      end
     end
   end
 
