@@ -55,4 +55,39 @@ RSpec.describe User, type: :model do
       end
     end
   end
+
+  describe '#eligible_rule_for_benefit' do
+    let(:user) { create(:user) }
+    let(:benefit) { create(:benefit) }
+    let(:matching_rule) { create(:rule, benefit: benefit) }
+    let(:non_matching_rule) { create(:rule, benefit: benefit) }
+
+    before do
+      allow(matching_rule).to receive(:matches_user_conditions?).with(user).and_return(true)
+      allow(non_matching_rule).to receive(:matches_user_conditions?).with(user).and_return(false)
+      benefit.rules << [matching_rule, non_matching_rule]
+    end
+
+    it 'returns the first matching rule for the benefit' do
+      expect(user.eligible_rule_for_benefit(benefit)).to eq(matching_rule)
+    end
+
+    context 'when no rules match' do
+      before do
+        allow(matching_rule).to receive(:matches_user_conditions?).with(user).and_return(false)
+      end
+
+      it 'returns nil' do
+        expect(user.eligible_rule_for_benefit(benefit)).to be_nil
+      end
+    end
+
+    context 'when benefit has no rules' do
+      let(:empty_benefit) { create(:benefit) }
+
+      it 'returns nil' do
+        expect(user.eligible_rule_for_benefit(empty_benefit)).to be_nil
+      end
+    end
+  end
 end 
