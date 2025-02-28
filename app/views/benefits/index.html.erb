@@ -1,0 +1,71 @@
+<div class="container">
+  <div class="row">
+    <div class="col-12">
+      <h1>Prestations accordées</h1>
+    </div>
+  </div>
+
+  <%# Total Available Amount Card %>
+  <div class="row mt-4">
+    <div class="col-12">
+      <div class="card-body p-4">
+        <h5 class="card-title">Total disponible</h5>
+        <p class="card-text display-4"><%= number_to_currency(@total_available, unit: "€", format: "%n €") %></p>
+      </div>
+      
+    </div>
+  </div>
+
+  <%# Active Benefits Section %>
+  <div class="row mt-4">
+    <div class="col-12">
+      <% if @active_benefits.any? %>
+        <div class="row">
+          <% @active_benefits.each do |benefit| %>
+            <div class="col-md-6 mb-3">
+              <div class="card">
+                <div class="card-body p-0">
+                  <div class="card-top bg-primary-subtle rounded-top p-3">
+                    <h5 class="card-title text-primary mb-1"><%= benefit.benefit.name %></h5>
+                    <h6 class="mb-2 text-primary-emphasis"><%= benefit.rule.name %></h6>
+                  </div>
+                  <div class="card-text mt-2 p-3">
+                    <% if benefit.amount_to_grant > 0 %>
+                      <div class="d-flex">
+                        <div class="d-flex align-items-center mb-1">
+                          <h3 class=" fw-light me-2 mb-2">Montant:</h3> 
+                          <h4 class=" fw-light mb-2 ms-auto"><%= number_to_currency(benefit.amount, unit: "€", format: "%n €") %></h4>
+                        </div>
+                        <div class="d-flex align-items-center mb-1">
+                          <h3 class=" fw-light me-2 mb-2">Montant à accorder:</h3> 
+                          <h4 class=" fw-light mb-2 ms-auto"><%= number_to_currency(benefit.amount_to_grant, unit: "€", format: "%n €") %></h4>
+                        </div>
+                      </div>
+                    <% else %>
+                      <div class="d-flex align-items-center mb-1">
+                        <h3 class="fs-15 fw-light me-2 mb-2">Montant:</h3> 
+                        <h4 class=" fw-light mb-2 ms-auto"><%= number_to_currency(benefit.amount, unit: "€", format: "%n €") %></h4>
+                      </div>
+                    <% end %>
+                    <div class="d-flex align-items-center mb-1">
+                      <h3 class=" fw-light me-2 mb-2">Accordé le:</h3> 
+                      <h4 class=" fw-light mb-2 ms-auto"><%= l(benefit.granted_at, format: :date) if benefit.granted_at %></h4>
+                    </div>
+                    <div class="d-flex align-items-center mb-1">
+                      <h3 class=" fw-light me-2 mb-2">Statut:</h3> 
+                      <h4 class=" fw-light mb-2 ms-auto"><span class="badge bg-success"><%= benefit.status.capitalize %></span></h4>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      <% else %>
+        <div class="alert alert-info">
+          You don't have any active benefits at the moment.
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div> 

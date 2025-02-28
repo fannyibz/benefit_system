@@ -1,0 +1,40 @@
+body {
+  background-color: #f8f9fa;
+}
+
+h1 {
+  color: $blue;
+  font-weight: 400;
+}
+
+h2 {
+  color: $blue;
+  font-weight: 500;
+  margin-bottom: 1.9rem;
+}
+
+h3 {
+  font-size: 1.1rem;
+  font-weight: 300;
+}
+
+h4 {
+  font-size: 1.1rem;
+  font-weight: 400;
+  color: $blue-light;
+}
+
+h5 {
+  color: $medium-gray;
+  font-weight: 400;
+}
+
+h6 {
+  font-weight: 300;
+  color: $blue-light;
+}
+
+.container {
+  margin-top: 140px;
+  margin-bottom: 80px;
+}

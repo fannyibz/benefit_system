@@ -1,0 +1,21 @@
+
+.card {
+  border-radius: 3px;
+  overflow: hidden;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+  margin: 10px 0px;
+  padding-bottom: 5px;
+  background-color: $light-gray;
+}
+
+.card-body {
+  color: #e1ecf7;
+  background-color: $light-gray;
+  p {
+    margin-bottom: 5px;
+  }
+}
+
+.card-title {
+  padding-bottom: 6px;
+}
