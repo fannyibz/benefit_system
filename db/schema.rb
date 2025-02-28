@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_02_27_084428) do
+ActiveRecord::Schema[8.0].define(version: 2025_02_28_100906) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -19,6 +19,17 @@ ActiveRecord::Schema[8.0].define(version: 2025_02_27_084428) do
     t.integer "recurrence", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "reimbursements", force: :cascade do |t|
+    t.bigint "user_benefit_id", null: false
+    t.bigint "user_id", null: false
+    t.integer "amount", null: false
+    t.string "status", default: "pending"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_benefit_id"], name: "index_reimbursements_on_user_benefit_id"
+    t.index ["user_id"], name: "index_reimbursements_on_user_id"
   end
 
   create_table "rules", force: :cascade do |t|
@@ -65,6 +76,8 @@ ActiveRecord::Schema[8.0].define(version: 2025_02_27_084428) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "reimbursements", "user_benefits"
+  add_foreign_key "reimbursements", "users"
   add_foreign_key "rules", "benefits"
   add_foreign_key "user_benefits", "benefits"
   add_foreign_key "user_benefits", "rules"

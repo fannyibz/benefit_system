@@ -11,6 +11,7 @@ class User < ApplicationRecord
                    format: { with: /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i,
                            message: "must be a valid email address" }
 
+  has_many :reimbursements
   has_many :user_benefits
   has_many :benefits, through: :user_benefits
   has_many :rules, through: :user_benefits

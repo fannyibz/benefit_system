@@ -1,0 +1,29 @@
+<div class="container">
+   <div class="row">
+    <div class="col-12">
+      <h1>Demande de paiement</h1>
+    </div>
+  </div>
+  <div class="row justify-content-center">
+    <div class="col-12">
+      <div class="card">
+        <div class="card-body">
+          <%= simple_form_for @reimbursement do |f| %>
+            <%= f.association :user_benefit, 
+                label: "Avatange",
+                collection: @user_benefits,
+                label_method: lambda { |benefit| "#{benefit.benefit.name} (Disponible: #{number_to_currency(benefit.amount)})" },
+                input_html: { class: 'bg-light' } %>
+            <%= f.input :amount, label: "Montant à débiter", input_html: { class: 'bg-light' } %>
+            <%= f.button :submit, value: "Débiter", class: 'btn btn-primary' %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row mt-4 mb-5">
+    <div class="col-12">
+      <%= link_to "Retour", :back, class: "btn btn-outline-secondary" %>
+    </div>
+  </div>
+</div> 

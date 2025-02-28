@@ -13,4 +13,5 @@ Rails.application.routes.draw do
 
 
   resources :benefits, only: [:index]
+  resources :reimbursements, only: [:new, :create]
 end

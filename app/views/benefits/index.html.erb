@@ -33,27 +33,31 @@
                     <% if benefit.amount_to_grant > 0 %>
                       <div class="d-flex">
                         <div class="d-flex align-items-center mb-1">
-                          <h3 class=" fw-light me-2 mb-2">Montant:</h3> 
-                          <h4 class=" fw-light mb-2 ms-auto"><%= number_to_currency(benefit.amount, unit: "€", format: "%n €") %></h4>
+                          <h3 class="fw-light me-2 mb-2">Montant:</h3> 
+                          <h4 class="fw-light mb-2 ms-auto"><%= number_to_currency(benefit.amount, unit: "€", format: "%n €") %></h4>
                         </div>
                         <div class="d-flex align-items-center mb-1">
-                          <h3 class=" fw-light me-2 mb-2">Montant à accorder:</h3> 
-                          <h4 class=" fw-light mb-2 ms-auto"><%= number_to_currency(benefit.amount_to_grant, unit: "€", format: "%n €") %></h4>
+                          <h3 class="fw-light me-2 mb-2">Montant à accorder:</h3> 
+                          <h4 class="fw-light mb-2 ms-auto"><%= number_to_currency(benefit.amount_to_grant, unit: "€", format: "%n €") %></h4>
                         </div>
                       </div>
                     <% else %>
                       <div class="d-flex align-items-center mb-1">
                         <h3 class="fs-15 fw-light me-2 mb-2">Montant:</h3> 
-                        <h4 class=" fw-light mb-2 ms-auto"><%= number_to_currency(benefit.amount, unit: "€", format: "%n €") %></h4>
+                        <h4 class="fw-light mb-2 ms-auto"><%= number_to_currency(benefit.amount, unit: "€", format: "%n €") %></h4>
                       </div>
                     <% end %>
                     <div class="d-flex align-items-center mb-1">
-                      <h3 class=" fw-light me-2 mb-2">Accordé le:</h3> 
-                      <h4 class=" fw-light mb-2 ms-auto"><%= l(benefit.granted_at, format: :date) if benefit.granted_at %></h4>
+                      <h3 class="fw-light me-2 mb-2">Accordé le:</h3> 
+                      <h4 class="fw-light mb-2 ms-auto"><%= l(benefit.granted_at, format: :date) if benefit.granted_at %></h4>
                     </div>
                     <div class="d-flex align-items-center mb-1">
-                      <h3 class=" fw-light me-2 mb-2">Statut:</h3> 
-                      <h4 class=" fw-light mb-2 ms-auto"><span class="badge bg-success"><%= benefit.status.capitalize %></span></h4>
+                      <h3 class="fw-light me-2 mb-2">Statut:</h3> 
+                      <h4 class="fw-light mb-2 ms-auto"><span class="badge bg-success"><%= benefit.status.capitalize %></span></h4>
+                    </div>
+                    <div class="d-flex justify-content-end mt-3">
+                      <%= link_to "Débiter", new_reimbursement_path(user_benefit_id: benefit.id), 
+                          class: "btn btn-outline-light" %>
                     </div>
                   </div>
                 </div>

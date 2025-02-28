@@ -4,6 +4,7 @@ class UserBenefit < ApplicationRecord
   belongs_to :user
   belongs_to :benefit
   belongs_to :rule
+  has_many :reimbursements
 
   enum :status, { active: 0, inactive: 1 }
 
@@ -16,6 +17,10 @@ class UserBenefit < ApplicationRecord
   scope :current_year, -> { where('created_at >= ?', Time.current.beginning_of_year) }
 
   before_create :set_initial_status
+
+  def available_balance
+    amount - reimbursements.sum(:amount)
+  end
 
   private
 
