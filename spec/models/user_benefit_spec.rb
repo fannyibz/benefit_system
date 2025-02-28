@@ -41,4 +41,4 @@ RSpec.describe UserBenefit, type: :model do
       expect(user_benefit.status).to eq('inactive')
     end
   end
-end 
+end

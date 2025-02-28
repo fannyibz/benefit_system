@@ -3,4 +3,4 @@ FactoryBot.define do
     name { "Prime annuelle" }
     recurrence { :yearly }
   end
-end 
+end

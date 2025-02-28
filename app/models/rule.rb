@@ -1,10 +1,9 @@
 class Rule < ApplicationRecord
   belongs_to :benefit
 
-  store :conditions, accessors: [:max_seniority, :min_seniority, :location, :contract_type], coder: JSON
+  store :conditions, accessors: %i[max_seniority min_seniority location contract_type], coder: JSON
 
   validates :name, :amount, presence: true
-
 
   def matches_user_conditions?(user)
     return false unless conditions.present?
@@ -32,7 +31,7 @@ class Rule < ApplicationRecord
 
   def contract_type_condition(user)
     return true unless contract_type.present?
-    
+
     user.contract_type == contract_type
   end
 

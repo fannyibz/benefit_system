@@ -42,10 +42,10 @@ RSpec.describe UserBenefitService::Generator do
       context 'with existing benefit' do
         let!(:existing_benefit) do
           create(:user_benefit,
-                user: user,
-                benefit: benefit,
-                amount: existing_amount,
-                created_at: Time.current.beginning_of_year + 1.day)
+                 user: user,
+                 benefit: benefit,
+                 amount: existing_amount,
+                 created_at: Time.current.beginning_of_year + 1.day)
         end
 
         before do
@@ -109,4 +109,4 @@ RSpec.describe UserBenefitService::Generator do
       end
     end
   end
-end 
+end

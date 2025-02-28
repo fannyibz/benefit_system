@@ -16,4 +16,4 @@ class Benefit < ApplicationRecord
   def benefit_rule_with_highest_amount(user)
     rules.select { |rule| rule.matches_user_conditions?(user) }.max_by(&:amount)
   end
-end 
+end

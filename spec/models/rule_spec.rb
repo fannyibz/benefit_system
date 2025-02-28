@@ -87,28 +87,30 @@ RSpec.describe Rule, type: :model do
     end
 
     context 'with multiple conditions' do
-      let(:user) { create(:user, 
-                         start_date: 3.years.ago,
-                         location: 'Paris',
-                         contract_type: 'full_time') }
+      let(:user) do
+        create(:user,
+               start_date: 3.years.ago,
+               location: 'Paris',
+               contract_type: 'full_time')
+      end
 
       it 'matches when all conditions are met' do
         rule.update(conditions: {
-          min_seniority: 2,
-          max_seniority: 5,
-          location: 'Paris',
-          contract_type: 'full_time'
-        })
+                      min_seniority: 2,
+                      max_seniority: 5,
+                      location: 'Paris',
+                      contract_type: 'full_time'
+                    })
         expect(rule.matches_user_conditions?(user)).to be true
       end
 
       it 'does not match when any condition fails' do
         rule.update(conditions: {
-          min_seniority: 2,
-          max_seniority: 5,
-          location: 'London',
-          contract_type: 'full_time'
-        })
+                      min_seniority: 2,
+                      max_seniority: 5,
+                      location: 'London',
+                      contract_type: 'full_time'
+                    })
         expect(rule.matches_user_conditions?(user)).to be false
       end
     end
@@ -119,4 +121,4 @@ RSpec.describe Rule, type: :model do
       expect(build(:rule)).to be_valid
     end
   end
-end 
+end

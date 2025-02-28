@@ -50,31 +50,6 @@ docker-compose up
 
 The application will be available at http://localhost:3000
 
-### Useful Commands
-
-- Run the Rails console:
-
-```
-docker-compose run web rails console
-```
-
-- Run tests:
-
-```
-docker-compose run web rspec
-```
-
-- View logs:
-
-```
-docker-compose logs
-```
-
-- Stop the application:
-
-```
-docker-compose down
-```
 
 ### Database Management
 

@@ -6,7 +6,7 @@ FactoryBot.define do
     password { 'password123' }
     start_date { Date.current }
     location { Faker::Address.city }
-    contract_type { 'CDI' }  
+    contract_type { 'CDI' }
   end
 
   trait :senior do
@@ -16,4 +16,4 @@ FactoryBot.define do
   trait :junior do
     start_date { 6.months.ago }
   end
-end 
+end

@@ -27,4 +27,4 @@ class UserBenefit < ApplicationRecord
   def set_initial_status
     self.status ||= :active
   end
-end 
+end

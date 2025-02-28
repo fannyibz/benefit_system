@@ -20,4 +20,4 @@ FactoryBot.define do
       amount { 500 }
     end
   end
-end 
+end

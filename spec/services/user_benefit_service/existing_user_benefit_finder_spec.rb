@@ -39,11 +39,11 @@ RSpec.describe UserBenefitService::ExistingUserBenefitFinder do
       context 'when user has an active benefit this year' do
         let!(:active_benefit) do
           create(:user_benefit,
-                user: user,
-                benefit: benefit,
-                status: :active,
-                amount: 100,
-                created_at: Time.current.beginning_of_year + 1.month)
+                 user: user,
+                 benefit: benefit,
+                 status: :active,
+                 amount: 100,
+                 created_at: Time.current.beginning_of_year + 1.month)
         end
 
         context 'when eligible rule amount is lower than active benefit' do
@@ -82,10 +82,10 @@ RSpec.describe UserBenefitService::ExistingUserBenefitFinder do
       context 'when user has no active benefit this year' do
         let!(:old_benefit) do
           create(:user_benefit,
-                user: user,
-                benefit: benefit,
-                status: :active,
-                created_at: 1.year.ago)
+                 user: user,
+                 benefit: benefit,
+                 status: :active,
+                 created_at: 1.year.ago)
         end
 
         it 'returns false' do
@@ -102,10 +102,10 @@ RSpec.describe UserBenefitService::ExistingUserBenefitFinder do
       context 'when user has an active benefit this month' do
         let!(:active_benefit) do
           create(:user_benefit,
-                user: user,
-                benefit: benefit,
-                status: :active,
-                created_at: Time.current.beginning_of_month + 1.day)
+                 user: user,
+                 benefit: benefit,
+                 status: :active,
+                 created_at: Time.current.beginning_of_month + 1.day)
         end
 
         it 'returns true' do
@@ -116,10 +116,10 @@ RSpec.describe UserBenefitService::ExistingUserBenefitFinder do
       context 'when user has no active benefit this month' do
         let!(:old_benefit) do
           create(:user_benefit,
-                user: user,
-                benefit: benefit,
-                status: :active,
-                created_at: 1.month.ago)
+                 user: user,
+                 benefit: benefit,
+                 status: :active,
+                 created_at: 1.month.ago)
         end
 
         it 'returns false' do
@@ -128,4 +128,4 @@ RSpec.describe UserBenefitService::ExistingUserBenefitFinder do
       end
     end
   end
-end 
+end

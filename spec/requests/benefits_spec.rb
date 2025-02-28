@@ -4,11 +4,11 @@ require 'rails_helper'
 
 RSpec.describe "Benefits", type: :request do
   include Devise::Test::IntegrationHelpers
-  
+
   before(:all) do
     Devise.mappings[:user] ||= Devise.add_mapping(:user, {})
   end
-  
+
   let(:user) { create(:user) }
 
   before do
@@ -64,4 +64,4 @@ RSpec.describe "Benefits", type: :request do
       end
     end
   end
-end 
+end

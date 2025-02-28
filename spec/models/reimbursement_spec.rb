@@ -12,7 +12,7 @@ RSpec.describe Reimbursement, type: :model do
     subject { build(:reimbursement, user: user, user_benefit: user_benefit) }
 
     it { should validate_presence_of(:amount) }
-    
+
     context 'amount validation' do
       before { subject.user_benefit = user_benefit }
       it { should validate_numericality_of(:amount).is_greater_than(0) }
@@ -41,4 +41,4 @@ RSpec.describe Reimbursement, type: :model do
       end
     end
   end
-end 
+end

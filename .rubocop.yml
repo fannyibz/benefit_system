@@ -40,3 +40,13 @@ Style/EmptyMethod:
   Enabled: false
 Bundler/OrderedGems:
   Enabled: false
+Metrics/BlockLength:
+  Max: 100
+  Exclude:
+    - 'spec/**/*'
+    - 'lib/tasks/**/*'
+    - 'config/routes.rb'
+  CountAsOne: ['array', 'hash']
+  AllowedMethods: ['describe', 'context', 'it', 'shared_examples']
+  Exclude:
+    - 'spec/services/**/*'

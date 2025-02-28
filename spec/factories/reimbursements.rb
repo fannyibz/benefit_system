@@ -6,4 +6,4 @@ FactoryBot.define do
     user_benefit
     amount { 100 }
   end
-end 
+end

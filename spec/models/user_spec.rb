@@ -12,12 +12,12 @@ RSpec.describe User, type: :model do
     it { should validate_presence_of(:contract_type) }
     it { should validate_presence_of(:password) }
     it { should validate_length_of(:password).is_at_least(6) }
-    
+
     describe 'email validations' do
       subject { build(:user) }
-      
+
       it { should validate_uniqueness_of(:email).case_insensitive }
-      
+
       context 'when email is invalid' do
         it 'is not valid' do
           user = build(:user)
@@ -90,4 +90,4 @@ RSpec.describe User, type: :model do
       end
     end
   end
-end 
+end

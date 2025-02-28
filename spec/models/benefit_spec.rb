@@ -8,7 +8,7 @@ RSpec.describe Benefit, type: :model do
     it { should have_many(:user_benefits) }
     it { should have_many(:users).through(:user_benefits) }
   end
-  
+
   describe 'validations' do
     it { should validate_presence_of(:name) }
   end
@@ -31,11 +31,11 @@ RSpec.describe Benefit, type: :model do
 
     it 'returns the first matching rule' do
       expect(benefit.rules).to include(matching_rule, non_matching_rule)
-      
+
       allow_any_instance_of(Rule).to receive(:matches_user_conditions?) do |rule, checked_user|
         rule == matching_rule && checked_user == user
       end
-      
+
       result = benefit.matching_benefit_rule_for(user)
       expect(result).to eq(matching_rule)
     end
@@ -44,7 +44,7 @@ RSpec.describe Benefit, type: :model do
       it 'returns nil' do
         expect(benefit.rules).to include(matching_rule, non_matching_rule)
         allow_any_instance_of(Rule).to receive(:matches_user_conditions?).and_return(false)
-        
+
         result = benefit.matching_benefit_rule_for(user)
         expect(result).to be_nil
       end
@@ -60,7 +60,7 @@ RSpec.describe Benefit, type: :model do
     it 'returns the matching rule with highest amount' do
       expect(benefit.rules).to include(high_amount_rule, low_amount_rule)
       allow_any_instance_of(Rule).to receive(:matches_user_conditions?).and_return(true)
-      
+
       result = benefit.benefit_rule_with_highest_amount(user)
       expect(result).to eq(high_amount_rule)
     end
@@ -68,11 +68,11 @@ RSpec.describe Benefit, type: :model do
     context 'when only one rule matches' do
       it 'returns the matching rule' do
         expect(benefit.rules).to include(high_amount_rule, low_amount_rule)
-        
+
         allow_any_instance_of(Rule).to receive(:matches_user_conditions?) do |rule, checked_user|
           rule == low_amount_rule && checked_user == user
         end
-        
+
         result = benefit.benefit_rule_with_highest_amount(user)
         expect(result).to eq(low_amount_rule)
       end
@@ -81,12 +81,12 @@ RSpec.describe Benefit, type: :model do
     context 'when no rules match' do
       it 'returns nil' do
         expect(benefit.rules).to include(high_amount_rule, low_amount_rule)
-        
+
         allow_any_instance_of(Rule).to receive(:matches_user_conditions?).and_return(false)
-        
+
         result = benefit.benefit_rule_with_highest_amount(user)
         expect(result).to be_nil
       end
     end
   end
-end 
+end

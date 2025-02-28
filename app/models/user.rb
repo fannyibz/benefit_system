@@ -8,8 +8,8 @@ class User < ApplicationRecord
 
   validates :first_name, :last_name, :email, :start_date, :location, :contract_type, presence: true
   validates :email, uniqueness: { case_sensitive: false },
-                   format: { with: /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i,
-                           message: "must be a valid email address" }
+                    format: { with: /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i,
+                              message: "must be a valid email address" }
 
   has_many :reimbursements
   has_many :user_benefits

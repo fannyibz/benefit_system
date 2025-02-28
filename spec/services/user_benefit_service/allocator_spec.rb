@@ -75,4 +75,4 @@ RSpec.describe UserBenefitService::Allocator do
       end
     end
   end
-end 
+end
