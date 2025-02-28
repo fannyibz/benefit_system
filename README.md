@@ -26,7 +26,7 @@ This application helps companies manage their employee benefits and reimbursemen
 1. Clone the repository:
 
 ```
-git clone [benefit_system](https://github.com/fannyibz/benefit_system)
+git clone git@github.com:fannyibz/benefit_system.git
 cd benefit_system
 ```
 
