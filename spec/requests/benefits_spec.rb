@@ -19,6 +19,10 @@ RSpec.describe "Benefits", type: :request do
     context 'when successful' do
       let!(:active_benefit) { create(:user_benefit, user: user, amount: 100) }
 
+      before do
+        allow_any_instance_of(UserBenefitService::Allocator).to receive(:call).and_return(true)
+      end
+
       it 'returns a successful response' do
         get benefits_path
         expect(response).to be_successful
@@ -27,6 +31,7 @@ RSpec.describe "Benefits", type: :request do
 
     context 'when benefits cannot be loaded' do
       before do
+        allow_any_instance_of(UserBenefitService::Allocator).to receive(:call).and_return(true)
         allow_any_instance_of(User).to receive_message_chain(:user_benefits, :active_benefits)
           .and_raise(ActiveRecord::RecordNotFound)
       end
@@ -40,6 +45,7 @@ RSpec.describe "Benefits", type: :request do
 
     context 'when unexpected error occurs' do
       before do
+        allow_any_instance_of(UserBenefitService::Allocator).to receive(:call).and_return(true)
         allow_any_instance_of(User).to receive_message_chain(:user_benefits, :active_benefits)
           .and_raise(StandardError)
       end
